@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <extension key="uk.co.mjwconsult.checksum" type="module">
   <file>checksum</file>
-  <name>Checksum Access</name>
+  <name>Contact Checksum Utilities</name>
   <description>Access to checksum functionality via API and contact record</description>
   <license>AGPL-3.0</license>
   <maintainer>
@@ -10,7 +10,6 @@
   </maintainer>
   <urls>
     <url desc="Main Extension Page">https://github.com/mattwire/uk.co.mjwconsult.checksum</url>
-    <url desc="Documentation">https://aghstrategies.com/content/how-create-one-click-personalized-links-civicrm-emails</url>
     <url desc="Support">https://github.com/mattwire/uk.co.mjwconsult.checksum</url>
     <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
   </urls>
@@ -19,8 +18,12 @@
   <develStage>beta</develStage>
   <compatibility>
     <ver>4.7</ver>
+    <ver>4.6</ver>
   </compatibility>
-  <comments>https://civicrm.stackexchange.com/questions/4683/get-or-generate-a-contact-checksum-via-api</comments>
+  <comments>See:
+    https://civicrm.stackexchange.com/questions/4683/get-or-generate-a-contact-checksum-via-api,
+    https://aghstrategies.com/content/how-create-one-click-personalized-links-civicrm-emails
+  </comments>
   <civix>
     <namespace>CRM/Checksum</namespace>
   </civix>
