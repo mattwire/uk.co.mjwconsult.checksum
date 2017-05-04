@@ -123,7 +123,7 @@ function checksum_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
 }
 
 function checksum_civicrm_summaryActions(&$actions, $contactID) {
-  $actions['otherActions']['checksum'] = array(
+  $actions['checksum'] = array(
     'title' => 'Contact Checksum',
     'weight' => 999,
     'ref' => 'checksum',
