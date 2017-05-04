@@ -29,6 +29,11 @@ function civicrm_api3_contact_checksum_Generate($params) {
       'checksum' => $cs,
     );
 
+    // Makes no sense to use sequential mode
+    if (isset($params['sequential'])) {
+      unset($params['sequential']);
+    }
+
     // Spec: civicrm_api3_create_success($values = 1, $params = array(), $entity = NULL, $action = NULL)
     return civicrm_api3_create_success($returnValues, $params, 'ContactChecksum', 'generate');
   }
