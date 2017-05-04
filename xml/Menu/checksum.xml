@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/contact/checksum/generate</path>
+    <page_callback>CRM_Checksum_Form_Checksum</page_callback>
+    <title>Checksum</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>
