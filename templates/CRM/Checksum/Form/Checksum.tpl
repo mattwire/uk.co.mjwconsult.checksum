@@ -19,14 +19,19 @@
     <div class="crm-section">
       {capture assign=contributionUrl}{crmURL p='civicrm/contribute/transact' q="id=1&cid=" h=0 a=1 fe=1}{/capture}
       {capture assign=profileUrl}{crmURL p='civicrm/profile/edit' q="gid=1&id=" h=0 a=1 fe=1}{/capture}
+      {capture assign=webformUrl}{crmURL p='webform-url' q="cid=" h=0 a=1 fe=1}{/capture}
+
       <h3>An example to include in an email that you send from CiviCRM:</h3>
-      <div class="label">A Contribution page</div><div class="content">{$contributionUrl}{literal}{contact.contact_id}&cs={contact.checksum}{/literal}</div>
-      <div class="label">A Profile</div><div class="content">{$profileUrl}{literal}{contact.contact_id}&cs={contact.checksum}{/literal}</div>
+      <div class="label">A Contribution page</div><div class="content">{$contributionUrl}{literal}{contact.contact_id}&{contact.checksum}{/literal}</div>
+      <div class="label">A Profile</div><div class="content">{$profileUrl}{literal}{contact.contact_id}&{contact.checksum}{/literal}</div>
+      <div class="label">A Webform</div><div class="content">{$webformUrl}{literal}{contact.contact_id}&{contact.checksum}{/literal}</div>
+
     </div>
     <div class="crm-section">
       <h3>An example to include in an email that you send via an external email system (you will need to copy/paste separately for each contact as the checksums are different / or include the checksum in your contact export):</h3>
       <div class="label">A Contribution page</div><div class="content">{$contributionUrl}{$contactId}&cs={$checksum}</div>
       <div class="label">A Profile</div><div class="content">{$profileUrl}{$contactId}&cs={$checksum}</div>
+      <div class="label">A Webform</div><div class="content">{$webformUrl}{$contactId}&cs={$checksum}</div>
     </div>
   </div>
 {else}
