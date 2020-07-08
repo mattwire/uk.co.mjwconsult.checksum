@@ -10,15 +10,14 @@
   </maintainer>
   <urls>
     <url desc="Main Extension Page">https://github.com/mattwire/uk.co.mjwconsult.checksum</url>
-    <url desc="Support">https://github.com/mattwire/uk.co.mjwconsult.checksum</url>
+    <url desc="Support">https://mjw.pt/support/checksum</url>
     <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
   </urls>
-  <releaseDate>2018-03-07</releaseDate>
-  <version>1.1</version>
-  <develStage>beta</develStage>
+  <releaseDate>2020-07-08</releaseDate>
+  <version>1.3</version>
+  <develStage>stable</develStage>
   <compatibility>
-    <ver>4.7</ver>
-    <ver>4.6</ver>
+    <ver>5.24</ver>
   </compatibility>
   <comments>See:
     https://civicrm.stackexchange.com/questions/4683/get-or-generate-a-contact-checksum-via-api,

@@ -1,6 +1,16 @@
 <?php
+/*
+ +--------------------------------------------------------------------+
+ | Copyright CiviCRM LLC. All rights reserved.                        |
+ |                                                                    |
+ | This work is published under the GNU AGPLv3 license with some      |
+ | permitted exceptions and without any warranty. For full license    |
+ | and copyright information, see https://civicrm.org/licensing       |
+ +--------------------------------------------------------------------+
+ */
 
 require_once 'checksum.civix.php';
+use CRM_Checksum_ExtensionUtil as E;
 
 /**
  * Implements hook_civicrm_config().
@@ -132,30 +142,49 @@ function checksum_civicrm_summaryActions(&$actions, $contactID) {
     'href' => CRM_Utils_System::url('civicrm/contact/checksum/generate', "reset=1&cid={$contactID}"));
 }
 
-// --- Functions below this ship commented out. Uncomment as required. ---
-
 /**
- * Implements hook_civicrm_preProcess().
+ * hook_civicrm_pageRun
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_preProcess
- *
-function checksum_civicrm_preProcess($formName, &$form) {
+ * @param \CRM_Core_Page $page
+ */
+function checksum_civicrm_pageRun(&$page) {
+  $fname = 'checksum_civicrm_pageRun_'.$page->getVar('_name');
+  if (function_exists($fname)) {
+    $fname($page);
+  }
+}
 
-} // */
+/*
+ * Display extra info on the recurring contribution view
+ */
+function checksum_civicrm_pageRun_CRM_Contribute_Page_ContributionRecur($page) {
+  // get the recurring contribution record or quit
+  $crid = CRM_Utils_Request::retrieve('id', 'Integer', $page, FALSE);
+  try {
+    $recur = civicrm_api3('ContributionRecur', 'getsingle', ['id' => $crid]);
+  }
+  catch (CiviCRM_API3_Exception $e) {
+    return;
+  }
 
-/**
- * Implements hook_civicrm_navigationMenu().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_navigationMenu
- *
-function checksum_civicrm_navigationMenu(&$menu) {
-  _checksum_civix_insert_navigation_menu($menu, NULL, array(
-    'label' => ts('The Page', array('domain' => 'uk.co.mjwconsult.checksum')),
-    'name' => 'the_page',
-    'url' => 'civicrm/the-page',
-    'permission' => 'access CiviReport,access CiviContribute',
-    'operator' => 'OR',
-    'separator' => 0,
-  ));
-  _checksum_civix_navigationMenu($menu);
-} // */
+  $paymentProcessor = \Civi\Payment\System::singleton()->getById($recur['payment_processor_id']);
+  $template = CRM_Core_Smarty::singleton();
+  $cancelSubscriptionUrl = $paymentProcessor->subscriptionURL($recur['id'], 'recur', 'cancel');
+  $updateSubscriptionBillingUrl = $paymentProcessor->subscriptionURL($recur['id'], 'recur', 'billing');
+  $updateSubscriptionUrl = $paymentProcessor->subscriptionURL($recur['id'], 'recur', 'update');
+
+  $checksum = '&cs=' . CRM_Contact_BAO_Contact_Utils::generateChecksum($recur['contact_id']);
+  if ($cancelSubscriptionUrl) {
+    $template->assign('cancelSubscriptionUrl', $cancelSubscriptionUrl . $checksum);
+  }
+  if ($updateSubscriptionBillingUrl) {
+    $template->assign('updateSubscriptionBillingUrl', $updateSubscriptionBillingUrl . $checksum);
+  }
+  if ($updateSubscriptionUrl) {
+    $template->assign('updateSubscriptionUrl', $updateSubscriptionUrl . $checksum);
+  }
+
+  CRM_Core_Region::instance('page-body')->add([
+    'template' => 'CRM/Checksum/Form/ContributionRecur.tpl',
+  ]);
+}
