@@ -19,7 +19,7 @@
     <div class="crm-section">
       {capture assign=contributionUrl}{crmURL p='civicrm/contribute/transact' q="id=1&cid=" h=0 a=1 fe=1}{/capture}
       {capture assign=profileUrl}{crmURL p='civicrm/profile/edit' q="gid=1&id=" h=0 a=1 fe=1}{/capture}
-      {capture assign=webformUrl}{crmURL p='webform-url' q="cid=" h=0 a=1 fe=1}{/capture}
+      {capture assign=webformUrl}{crmURL p='webform-url' q="cid1=" h=0 a=1 fe=1}{/capture}
 
       <h3>An example to include in an email that you send from CiviCRM:</h3>
       <div class="label">A Contribution page</div><div class="content">{$contributionUrl}{literal}{contact.contact_id}&{contact.checksum}{/literal}</div>
