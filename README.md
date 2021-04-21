@@ -19,3 +19,10 @@ Example self-service links (for the current logged-in user) are available on the
 detail view: ![Recur self-service links](docs/images/recur_checksum.png)
 
 These are the same as the links that are available in recurring receipt emails.
+
+## Release notes
+
+### 1.4
+
+* Update civix file for PHP7.4 compatibility.
+* Drupal webform uses cid1 for the first contact.
