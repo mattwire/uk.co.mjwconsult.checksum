@@ -1,3 +1,5 @@
+# Moved to https://lab.civicrm.org/extensions/checksum
+
 # uk.co.mjwconsult.checksum
 Access to checksum functionality via API and contact record in CiviCRM.
 
